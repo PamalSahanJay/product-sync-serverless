@@ -19,12 +19,19 @@ functions:
     environment:
       INDEX_NAME: reference-article-product
       OPENSEARCH_USERNAME: admin
-      OPENSEARCH_PASSWORD: "#,cN@12345"
-      OPENSEARCH_ENDPOINT: https://search-poc-1-dev-product-sync-qdjw4r64lvwpg2t46655ni4ewy.us-east-1.es.amazonaws.com
+      OPENSEARCH_PASSWORD: "Ucsc@123"
+      OPENSEARCH_ENDPOINT: https://search-poc-1-product-sync-eqmcszrccgxy6n4lipqipfdiiq.us-east-1.es.amazonaws.com/
+
+  getProductData:
+    handler: products.getProduct
+    events:
+      - http:
+          method: post
+          path: get-product
 
 plugins:
-  - serverless-webpack
   - serverless-offline
 
-#package:
-#  individually: true
+package:
+ individually: true
+
