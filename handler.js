@@ -20,6 +20,7 @@ module.exports.indexProduct = async (event) =>  {
   try {
     await client.index({
       index: INDEX_NAME,
+      id: product.id,
       body: product
     })
     return {
