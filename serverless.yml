@@ -28,6 +28,13 @@ functions:
       - http:
           method: post
           path: get-product
+    environment:
+      PRODUCT_URL: http://ctpm-product-api-prod.aws.wiley.com:8080/v2/products
+      X_WPP_AUTH_TOKEN: X-WPP-AUTH-TOKEN
+      INDEX_NAME: reference-article-product
+      OPENSEARCH_USERNAME: admin
+      OPENSEARCH_PASSWORD: "Ucsc@123"
+      OPENSEARCH_ENDPOINT: https://search-poc-1-product-sync-eqmcszrccgxy6n4lipqipfdiiq.us-east-1.es.amazonaws.com/
 
 plugins:
   - serverless-offline
