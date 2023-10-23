@@ -9,12 +9,10 @@
   "author": "PJ",
   "license": "ISC",
   "devDependencies": {
-    "node-fetch": "^3.3.2",
-    "serverless-offline": "^13.2.0",
-    "serverless-webpack": "^5.13.0",
-    "webpack": "^5.88.2"
+    "serverless-offline": "^13.2.0"
   },
   "dependencies": {
-    "@opensearch-project/opensearch": "^2.4.0"
+    "@opensearch-project/opensearch": "^2.4.0",
+    "axios": "^1.5.1"
   }
 }

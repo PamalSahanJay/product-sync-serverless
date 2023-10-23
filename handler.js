@@ -1,5 +1,5 @@
 'use strict';
-import { Client } from '@opensearch-project/opensearch';
+const { Client } = require('@opensearch-project/opensearch');
 
 const INDEX_NAME = process.env.INDEX_NAME;
 const openSearchUsername = process.env.OPENSEARCH_USERNAME;
@@ -18,13 +18,14 @@ module.exports.indexProduct = async (event) =>  {
   let product = JSON.parse(event.body);
 
   try {
-       await client.index({
+    await client.index({
       index: INDEX_NAME,
+      id: product.id,
       body: product
     })
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'Document '+ product.id + 'indexed successfully.' })
+      body: JSON.stringify({ message: 'Document ' + product.id + 'indexed successfully.' })
     };
   } catch (error) {
     console.error('Error indexing document:', error);
