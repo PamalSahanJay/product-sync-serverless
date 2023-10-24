@@ -32,11 +32,11 @@ module.exports.getProduct = async (event) => {
   const url = `${baseUrl}/${id}`
   try {
     const response = await axios.get(url, { headers })
-    opensearch.indexCreation(response.data);
-    // return {
-    //   statusCode: 200,
-    //   body: JSON.stringify(response.data),
-    // };
+    const indexResponse = await opensearch.indexCreation(response.data);
+    return {
+      statusCode: 200,
+      body: JSON.stringify({message : indexResponse.message}),
+    };
   } catch (error) {
     return {
       statusCode: error.response.status,

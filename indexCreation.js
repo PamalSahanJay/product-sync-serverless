@@ -23,11 +23,11 @@ const indexCreation = async (product) => {
         })
         return {
             statusCode: 200,
-            message: 'Document ' + product.id + 'indexed successfully.'
+            message: 'Document ' + product.id + ' indexed successfully.'
         };
 
     } catch (error) {
-        console.error('Error indexing document:', error);
+        console.error('Error indexing document: ', error);
 
         return {
             statusCode: 500,
