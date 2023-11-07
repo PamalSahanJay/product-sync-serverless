@@ -1,6 +1,6 @@
 'use strict';
 const { Client } = require('@opensearch-project/opensearch');
-
+require('dotenv').config();
 const INDEX_NAME = process.env.INDEX_NAME;
 const openSearchUsername = process.env.OPENSEARCH_USERNAME;
 const openSearchPassword = process.env.OPENSEARCH_PASSWORD;

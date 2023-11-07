@@ -1,5 +1,6 @@
 const axios = require('axios');
 const opensearch = require('./indexCreation')
+require('dotenv').config();
 
 module.exports.getProduct = async (event) => {
   const baseUrl = process.env.PRODUCT_URL;
@@ -34,12 +35,13 @@ module.exports.getProduct = async (event) => {
     const response = await axios.get(url, { headers })
     const indexResponse = await opensearch.indexCreation(response.data);
     return {
-      statusCode: 200,
+      statusCode: indexResponse.statusCode,
       body: JSON.stringify({message : indexResponse.message}),
     };
   } catch (error) {
+    console.log(error)
     return {
-      statusCode: error.response.status,
+      statusCode: 500,
       body: JSON.stringify(error.message),
     };
   }
