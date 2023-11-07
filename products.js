@@ -1,5 +1,6 @@
 const axios = require('axios');
 const opensearch = require('./indexCreation')
+const validator = require('./validator')
 require('dotenv').config();
 
 module.exports.getProduct = async (event) => {
@@ -33,10 +34,16 @@ module.exports.getProduct = async (event) => {
   const url = `${baseUrl}/${id}`
   try {
     const response = await axios.get(url, { headers })
+    if (validator.validateModelType(response.data.modelType)) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ message: "Invalid Model Type" }),
+      };
+    }
     const indexResponse = await opensearch.indexCreation(response.data);
     return {
       statusCode: indexResponse.statusCode,
-      body: JSON.stringify({message : indexResponse.message}),
+      body: JSON.stringify({ message: indexResponse.message }),
     };
   } catch (error) {
     console.log(error)
