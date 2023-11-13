@@ -4,7 +4,7 @@ const validator = require('./validator')
 require('dotenv').config();
 
 module.exports.getProduct = async (event) => {
-  const baseUrl = process.env.PRODUCT_URL;
+  const baseUrl = process.env.PRODUCT_URL
   const AUTH_TOKEN = process.env.X_WPP_AUTH_TOKEN
   const token = event.headers[AUTH_TOKEN]
 
@@ -34,7 +34,7 @@ module.exports.getProduct = async (event) => {
   const url = `${baseUrl}/${id}`
   try {
     const response = await axios.get(url, { headers })
-    if (validator.validateModelType(response.data.modelType)) {
+    if (validator.validateModelType(response.data)) {
       return {
         statusCode: 400,
         body: JSON.stringify({ message: "Invalid Model Type" }),
