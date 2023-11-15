@@ -9,12 +9,16 @@
   "author": "PJ",
   "license": "ISC",
   "devDependencies": {
-    "serverless-offline": "^13.2.0",
-    "serverless-dotenv-plugin": "^6.0.0"
+    "serverless-dotenv-plugin": "^6.0.0",
+    "serverless-offline": "^13.2.0"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.449.0",
+    "@aws-sdk/client-sqs": "^3.449.0",
+    "@aws-sdk/lib-dynamodb": "^3.449.0",
     "@opensearch-project/opensearch": "^2.4.0",
     "axios": "^1.5.1",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "uuid": "^9.0.1"
   }
 }
