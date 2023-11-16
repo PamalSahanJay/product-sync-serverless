@@ -30,30 +30,26 @@ module.exports.createProduct = async (event) => {
 }
 
 module.exports.saveToElastic = async (event) => {
-  //console.log(JSON.stringify(event))
   console.log(event.Records[0].body)
   if (event.Records && event.Records[0] && event.Records[0].body) {
     const receiptHandle = event.Records[0].receiptHandle;
     const productData = JSON.parse(event.Records[0].body)
-    console.log("productData");
     console.log(productData)
     if (validator.validateModelType(productData)) {
-      console.log("invalid")
+      console.log("Invalid Model Type")
       return statusCode(400, "Invalid Model Type")
     }
     try {
-      console.log("---index creation")
       const response = await opensearch.indexCreation(productData);
-      console.log(JSON.stringify(response))
+console.log(JSON.stringify(response))
       console.log("index creation done")
     } catch (error) {
       console.log(error)
     }
 
     try {
-      console.log("deleting message")
       const delResponste = await SQS.deleteMessage(receiptHandle)
-      console.log(delResponste)
+console.log(delResponste)
       console.log("deleting message done")
     } catch (error) {
       console.log(error)
