@@ -4,7 +4,8 @@
   "description": "",
   "main": "handler.js.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "serverless offline start"
   },
   "author": "PJ",
   "license": "ISC",
@@ -17,8 +18,10 @@
     "@aws-sdk/client-sqs": "^3.449.0",
     "@aws-sdk/lib-dynamodb": "^3.449.0",
     "@opensearch-project/opensearch": "^2.4.0",
+    "aws-sdk": "^2.1664.0",
     "axios": "^1.5.1",
     "dotenv": "^16.3.1",
+    "kafka-node": "^5.0.0",
     "uuid": "^9.0.1"
   }
 }

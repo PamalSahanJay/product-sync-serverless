@@ -26,7 +26,8 @@ functions:
           path: get-product
 
   triggerDynamoDB:
-    handler: src/handler.getDynamoTableData
+    # handler: src/handler.getDynamoTableData
+    handler: src/kafkaHandler.listenToDynamoDB
     role: ${env:IAM_ROLE}
     events:
       - stream:
@@ -45,40 +46,32 @@ plugins:
   - serverless-dotenv-plugin
 
 resources:
-  Resources:
-    productTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ${env:TABLE_NAME}
-        BillingMode: PAY_PER_REQUEST
-        AttributeDefinitions:
-          - AttributeName: productId
-            AttributeType: S
-        KeySchema:
-          - AttributeName: productId
-            KeyType: HASH
-        StreamSpecification:
-          StreamViewType: NEW_IMAGE
+  - ${file(infrastructure.yml)}
+  - ${file(dynamoDBTable.yml)}
 
-    MyKafkaCluster:
-      Type: AWS::MSK::Cluster
-      Properties:
-        BrokerNodeGroupInfo:
-          InstanceType: kafka.t3.small
-          ClientSubnets:
-            - subnet-0404893c8635c986f
-            - subnet-080c262d4748c9ed5
-        ClusterName: my-kafka-cluster
-        KafkaVersion: 2.2.1
-        NumberOfBrokerNodes: 2
+  
 
-    MyQueue:
-      Type: AWS::SQS::Queue
-      Properties:
-        QueueName: product-topic
-        VisibilityTimeout: 30
-        MaximumMessageSize: 2048
-        MessageRetentionPeriod: 345600 
+    # MyKafkaCluster:
+    #   Type: AWS::MSK::Cluster
+    #   Properties:
+    #     BrokerNodeGroupInfo:
+    #       InstanceType: kafka.t3.small
+    #       ClientSubnets:
+    #         - subnet-0404893c8635c986f
+    #         - subnet-080c262d4748c9ed5
+    #     ClusterName: my-kafka-cluster
+    #     KafkaVersion: 2.2.1
+    #     NumberOfBrokerNodes: 2
+
+    # MyQueue:
+    #   Type: AWS::SQS::Queue
+    #   Properties:
+    #     QueueName: product-topic
+    #     VisibilityTimeout: 30
+    #     MaximumMessageSize: 2048
+    #     MessageRetentionPeriod: 345600 
+
+
 
 
 package:
